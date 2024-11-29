@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import openpyxl
 import requests
 from bs4 import BeautifulSoup
 
