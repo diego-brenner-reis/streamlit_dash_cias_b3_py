@@ -179,6 +179,6 @@ st.data_editor(data_filtered[['Nome', 'Segmento', 'Cotação', 'VPA', 'P_VP', 'L
                                     'Mrg__Líq_', 'ROIC', 'ROE',
                                     'Cresc__Rec_5a']], use_container_width=True)
 
-st.write(f'{len(data_filtered)} Ações filtradas.')
+st.write(f'{len(data_filtered)} ações filtradas.')
 
 #-------------------------------------------------------------------------------------------------
