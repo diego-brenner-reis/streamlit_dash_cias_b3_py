@@ -184,3 +184,92 @@ st.data_editor(data_filtered[['Nome', 'Segmento', 'Cotação', 'VPA', 'P_VP', 'L
 st.write(f'{len(data_filtered)} ações filtradas.')
 
 #-------------------------------------------------------------------------------------------------
+
+# Proventos.
+
+st.title("Proventos")
+
+proventos = pd.DataFrame(columns = ['Data', 'Valor', 'Tipo','Data de pagamento', 'Por quantas ações'])
+
+acao = st.selectbox("Selecione uma ação", sorted(data_filtered.index.tolist())) # lista suspensa
+
+url_2 = f'https://fundamentus.com.br/proventos.php?papel={acao}&tipo=2'
+
+#---------------------------------------------------------------------------------------------------
+
+request_2 = requests.get(url_2, headers = header).text
+soup = BeautifulSoup(request_2, 'html.parser')
+table = soup.find('table')
+
+for linha in table.tbody.find_all('tr'):
+  columns = linha.find_all('td')
+  if (columns != []):
+    data = columns[0].text.strip(' ')
+    valor = columns[1].text.strip(' ')
+    tipo = columns[2].text.strip(' ')
+    data_pagamento = columns[3].text.strip(' ')
+    quantidade_acoes = columns[4].text.strip(' ')
+    proventos = pd.concat(([proventos, pd.DataFrame.from_records([{'Data': data,
+                                                     'Valor': valor,
+                                                     'Tipo': tipo,
+                                                     'Data de pagamento': data_pagamento,
+                                                     'Por quantas ações': quantidade_acoes}])]))
+
+#---------------------------------------------------------------------------------------------------
+
+proventos['Data'] = pd.to_datetime(proventos['Data'], format = '%d/%m/%Y', errors = 'ignore')
+
+proventos['Valor'] =[x.replace(',', '.') for x in proventos['Valor']]
+proventos = proventos.astype({'Valor': float})
+
+temp = pd.to_datetime(proventos['Data de pagamento'], format = '%d/%m/%Y', errors = 'coerce')
+proventos['Data de pagamento'] = proventos['Data de pagamento'].where(temp.isna(), temp.dt.date)
+
+proventos['Tipo'] = proventos['Tipo'].str.upper()
+
+proventos = proventos.astype({'Por quantas ações': int})
+
+proventos = proventos.set_index('Data')
+
+#---------------------------------------------------------------------------------------------------
+
+# Gráfico.
+
+# Entrada de anos pelo usuário
+ano_inicial = st.number_input("Ano Inicial", min_value=2000, max_value=2100, value=datetime.today().year-5)
+ano_final = st.number_input("Ano Final", min_value=2000, max_value=2100, value=datetime.today().year)
+
+# Filtrando os dados com base nos anos escolhidos
+proventos.index = pd.to_datetime(proventos.index)
+prov = proventos[(proventos.index.year >= ano_inicial) & (proventos.index.year <= ano_final)]
+
+# Cálculo dos proventos anuais
+prov_anual = (prov['Valor'] / prov['Por quantas ações']).resample('Y').sum()
+
+# Média dos proventos anuais
+media_prov = prov_anual.mean()
+
+# Gráfico
+plt.figure(figsize=(15, 8))
+
+# Adicionando rótulos nas barras
+for i, valor in enumerate(prov_anual):
+    plt.text(prov_anual.index.year[i], valor, f'{valor:.2f}', ha='center', va='bottom', fontsize=7)
+
+# Plotando as barras
+plt.bar(prov_anual.index.year, prov_anual)
+plt.axhline(y=media_prov, color='red', linestyle='--')
+
+# Texto sobre a linha da média
+plt.text(plt.xlim()[1], media_prov, f'Média dos proventos: R$ {media_prov:.2f}', va='bottom', color='black')
+
+# Título e rótulos
+plt.title(f'Proventos por ação entre {ano_inicial} e {ano_final}')
+plt.xlabel('Ano')
+plt.ylabel('Proventos (R$)')
+
+# Exibindo o gráfico no Streamlit
+st.pyplot(plt)
+
+# Exibindo a média dos proventos
+st.write(f'Média dos proventos: R$ {media_prov:.2f}')
