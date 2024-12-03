@@ -278,7 +278,7 @@ plt.text(plt.xlim()[1], media_prov, f'Média dos proventos: R$ {media_prov:.2f}'
 
 # Título e rótulos
 
-plt.title(f'Proventos por ação entre {ano_inicial} e {ano_final}')
+plt.title(f'Proventos por ação {acao} entre {ano_inicial} e {ano_final}')
 plt.xlabel('Ano')
 plt.ylabel('Proventos (R$)')
 
