@@ -3,6 +3,10 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 
+import matplotlib.pyplot as plt
+from datetime import datetime
+from datetime import timedelta
+
 st.set_page_config(layout="wide")
 
 #--------------------------------------------------------------------------------------
