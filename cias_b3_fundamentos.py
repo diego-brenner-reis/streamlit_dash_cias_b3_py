@@ -236,40 +236,52 @@ proventos = proventos.set_index('Data')
 # Gráfico.
 
 # Entrada de anos pelo usuário
-ano_inicial = st.number_input("Ano Inicial", min_value=2000, max_value=2100, value=datetime.today().year-5)
-ano_final = st.number_input("Ano Final", min_value=2000, max_value=2100, value=datetime.today().year)
+
+ano_atual = datetime.today().year
+ano_inicial = st.number_input("Ano Inicial", min_value=2000, max_value=datetime.today().year, value=ano_atual-5)
+ano_final = st.number_input("Ano Final", min_value=2000, max_value=datetime.today().year, value=ano_atual)
 
 # Filtrando os dados com base nos anos escolhidos
+
 proventos.index = pd.to_datetime(proventos.index)
 prov = proventos[(proventos.index.year >= ano_inicial) & (proventos.index.year <= ano_final)]
 
 # Cálculo dos proventos anuais
+
 prov_anual = (prov['Valor'] / prov['Por quantas ações']).resample('Y').sum()
 
 # Média dos proventos anuais
+
 media_prov = prov_anual.mean()
 
 # Gráfico
+
 plt.figure(figsize=(15, 8))
 
 # Adicionando rótulos nas barras
+
 for i, valor in enumerate(prov_anual):
     plt.text(prov_anual.index.year[i], valor, f'{valor:.2f}', ha='center', va='bottom', fontsize=7)
 
 # Plotando as barras
+
 plt.bar(prov_anual.index.year, prov_anual)
 plt.axhline(y=media_prov, color='red', linestyle='--')
 
 # Texto sobre a linha da média
+
 plt.text(plt.xlim()[1], media_prov, f'Média dos proventos: R$ {media_prov:.2f}', va='bottom', color='black')
 
 # Título e rótulos
+
 plt.title(f'Proventos por ação entre {ano_inicial} e {ano_final}')
 plt.xlabel('Ano')
 plt.ylabel('Proventos (R$)')
 
 # Exibindo o gráfico no Streamlit
+
 st.pyplot(plt)
 
 # Exibindo a média dos proventos
+
 st.write(f'Média dos proventos: R$ {media_prov:.2f}')
