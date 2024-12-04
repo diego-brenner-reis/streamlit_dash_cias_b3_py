@@ -265,7 +265,7 @@ plt.figure(figsize=(15, 8))
 # Adicionando rótulos nas barras
 
 for i, valor in enumerate(prov_anual):
-    plt.text(prov_anual.index.year[i], valor, f'{valor:.2f}', ha='center', va='bottom', fontsize=7)
+    plt.text(prov_anual.index.year[i], valor, f'{valor:.2f}', ha='center', va='bottom', fontsize=12)
 
 # Plotando as barras
 
@@ -274,13 +274,13 @@ plt.axhline(y=media_prov, color='red', linestyle='--')
 
 # Texto sobre a linha da média
 
-plt.text(plt.xlim()[1], media_prov, f'Média dos proventos: R$ {media_prov:.2f}', va='bottom', color='black')
+plt.text(plt.xlim()[1], media_prov, f'Média dos proventos: R$ {media_prov:.2f}', va='bottom', color='black', fontsize=12)
 
 # Título e rótulos
 
-plt.title(f'Proventos por ação {acao} entre {ano_inicial} e {ano_final}')
-plt.xlabel('Ano')
-plt.ylabel('Proventos (R$)')
+plt.title(f'Proventos por ação {acao} entre {ano_inicial} e {ano_final}', fontsize=16)
+plt.xlabel('Ano', fontsize=14)
+plt.ylabel('Proventos (R$)', fontsize=14)
 
 # Exibindo o gráfico no Streamlit
 
