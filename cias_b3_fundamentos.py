@@ -279,7 +279,7 @@ plt.text(plt.xlim()[1], media_prov, f'Média dos proventos: R$ {media_prov:.2f}'
 # Título e rótulos
 
 plt.title(f'Proventos por ação {acao} entre {ano_inicial} e {ano_final}', fontsize=20)
-plt.xlabel('Ano', fontsize=16)
+# plt.xlabel('Ano', fontsize=16)
 plt.ylabel('Proventos (R$)', fontsize=16)
 
 # Exibindo o gráfico no Streamlit
