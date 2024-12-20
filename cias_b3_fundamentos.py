@@ -290,7 +290,23 @@ st.pyplot(plt)
 
 # st.write(f'Média dos proventos: R$ {media_prov:.2f}')
 
-st.markdown(
-    f'<a href="https://statusinvest.com.br/acoes/{acao}" target="_blank" style="color:blue; font-size:20px; text-decoration:none;">Mais detalhes de {acao} aqui!</a>',
-    unsafe_allow_html=True
-)
+#st.markdown(
+#    f'<a href="https://statusinvest.com.br/acoes/{acao}" target="_blank" style="color:blue; font-size:20px; text-decoration:none;">Mais detalhes de {acao} aqui!</a>',
+#    unsafe_allow_html=True
+#)
+
+# Código HTML com JavaScript para rolar até o XPath especificado
+html_code = f"""
+    <a href="https://investidor10.com.br/acoes/{acao}" target="_blank" style="color:blue; font-size:20px; text-decoration:none;">Mais detalhes de {acao} aqui!</a>
+    <script>
+        window.onload = function() {{
+            var element = document.evaluate('//*[@id="indicators-history"]/div[1]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
+            if (element) {{
+                element.scrollIntoView({{ behavior: 'smooth', block: 'center' }});
+            }}
+        }};
+    </script>
+"""
+
+# Exibe o HTML com o JavaScript dentro do Streamlit
+st.components.v1.html(html_code, height=600)
