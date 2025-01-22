@@ -140,7 +140,7 @@ col3_slider = st.sidebar.slider("**P_L:**  aproximadamente igual a 10.", 0.0, 20
 col4_slider = st.sidebar.slider("**Dividend_Yield_%:**  maior ou igual a 10% é melhor.", 0.0, 30.0, value=(0.0, 20.0), step=1.0)
 col5_slider = st.sidebar.slider("**EV_EBIT:**  menor ou igual a 3 é melhor.", 0.0, 20.0, value=(0.0, 10.0), step=0.5)
 col6_slider = st.sidebar.slider("**EV_EBITDA:**  menor ou igual a 3 é melhor.", 0.0, 20.0, value=(0.0, 10.0), step=0.5)
-col7_slider = st.sidebar.slider("**Margem_Líq_%:**  quanto maior melhor.", 0, 100, value=(0, 50), step=5)
+col7_slider = st.sidebar.slider("**Margem_Líq_%:**  quanto maior melhor.", 0, 500, value=(0, 50), step=5)
 col8_slider = st.sidebar.slider("**ROIC_%:**  quanto maior melhor.", 0, 100, value=(0, 50), step=5)
 col9_slider = st.sidebar.slider("**ROE_%:**  quanto maior melhor.", 0, 100, value=(0, 50), step=5)
 col10_slider = st.sidebar.slider("**Cresc__Rec_5_anos_%:**  quanto maior melhor.", -100, 100, value=(-50, 100), step=5)
