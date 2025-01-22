@@ -135,7 +135,7 @@ st.sidebar.title("**Indicadores**")
 st.sidebar.write("Utilize os sliders para ajustar os valores dos indicadores.")
 
 col1_slider = st.sidebar.slider("**P_VP:**  menor que 1 é melhor.", 0.0, 5.0, value=(0.0, 2.0), step=0.1)
-col2_slider = st.sidebar.slider("**PSR:**  menor que 1 é melhor.", 0.0, 5.0, value=(0.0, 2.0), step=0.1)
+col2_slider = st.sidebar.slider("**PSR:**  menor que 1 é melhor.", 0.0, 50.0, value=(0.0, 2.0), step=0.1)
 col3_slider = st.sidebar.slider("**P_L:**  aproximadamente igual a 10.", 0.0, 20.0, value=(0.0, 10.0), step=0.1)
 col4_slider = st.sidebar.slider("**Dividend_Yield_%:**  maior ou igual a 10% é melhor.", 0.0, 30.0, value=(0.0, 20.0), step=1.0)
 col5_slider = st.sidebar.slider("**EV_EBIT:**  menor ou igual a 3 é melhor.", 0.0, 20.0, value=(0.0, 10.0), step=0.5)
