@@ -290,13 +290,15 @@ st.pyplot(plt)
 
 # st.write(f'Média dos proventos: R$ {media_prov:.2f}')
 
-# st.markdown(
-#     f'<a href="https://investidor10.com.br/acoes/{acao}" target="_blank" style="color:blue; font-size:20px; text-decoration:none;">Mais detalhes de {acao} aqui!</a>',
-#     unsafe_allow_html=True
-# )
-
 st.markdown(
+    f'<a href="https://investidor10.com.br/acoes/{acao}" target="_blank" style="color:blue; font-size:20px; text-decoration:none;">Mais detalhes de {acao} aqui!</a>',
+    unsafe_allow_html=True,
     f'<a href="https://news.google.com/search?q={acao}&hl=pt-BR&gl=BR&ceid=BR%3Apt-419" target="_blank" style="color:blue; font-size:20px; text-decoration:none;">Notícias de {acao} aqui!</a>',
     unsafe_allow_html=True
 )
+
+# st.markdown(
+#     f'<a href="https://news.google.com/search?q={acao}&hl=pt-BR&gl=BR&ceid=BR%3Apt-419" target="_blank" style="color:blue; font-size:20px; text-decoration:none;">Notícias de {acao} aqui!</a>',
+#     unsafe_allow_html=True
+# )
 
