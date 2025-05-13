@@ -295,3 +295,8 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+st.markdown(
+    f'<a href="https://news.google.com/search?q={acao}&hl=pt-BR&gl=BR&ceid=BR%3Apt-419" target="_blank" style="color:blue; font-size:20px; text-decoration:none;">Notícias de {acao} aqui!</a>',
+    unsafe_allow_html=True
+)
+
