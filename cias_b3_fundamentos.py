@@ -1,3 +1,7 @@
+# Terminal > Novo Terminal
+# cd C:\Users\pccli\Desktop\DIEGO\Capacitação\Python\Dashboards
+# streamlit run cias_b3_fundamentos.py
+
 import streamlit as st
 import pandas as pd
 import requests
